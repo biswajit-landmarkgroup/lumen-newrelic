@@ -61,6 +61,9 @@ class NewRelicMiddleware
         $route = $request->route();
 
         if (is_array($route)) {
+            if (isset($route[1]) && isset($route[1]['transaction'])) {
+                return $route[1]['transaction'];
+            }
             // Try the assigned controller action
             if (isset($route[1]) && isset($route[1]['uses'])) {
                 return $route[1]['uses'];
